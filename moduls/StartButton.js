@@ -1,12 +1,17 @@
 import { View, Animated, Pressable, Text, StyleSheet} from 'react-native';
 import { useFonts } from 'expo-font';
-import { useRef } from 'react';
+import { useRef,useCallback } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
+
+
+SplashScreen.preventAutoHideAsync();
 
 const StartButton = (props) =>{
+    //animacja
+
     const fadeAnim = useRef(new Animated.Value(1)).current;
 
     const fadeOut = () => {
-        // Will change fadeAnim value to 0 in 3 seconds
         Animated.timing(fadeAnim, {
           toValue: 0,
           duration: 1000,
@@ -14,10 +19,23 @@ const StartButton = (props) =>{
         }).start();
       };    
 
-    useFonts({
-        'BebasNeue': require('../assets/fonts/BebasNeue-Regular.ttf'),
-    });
+    // Font 
 
+    const [fontsLoaded] = useFonts({
+        'RighteousRegular': require('../assets/fonts/Righteous-Regular.ttf'),
+      });
+    
+      const onLayoutRootView = useCallback(async () => {
+        if (fontsLoaded) {
+          await SplashScreen.hideAsync();
+        }
+      }, [fontsLoaded]);
+    
+      if (!fontsLoaded) {
+        return null;
+      }
+
+    //Przycisk
     return(
         <>
             <Pressable onPress={fadeOut}>
@@ -36,14 +54,16 @@ const styles = StyleSheet.create({
         paddingHorizontal:70,
         backgroundColor:'#F2A154',
         borderRadius:30,
+        shadowColor:'black',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.3,
+        shadowRadius:5,
     },
     text: {
         color:'#314E52',
         fontSize:100,
-        fontFamily:'BebasNeue',
-        textShadowColor: '#314E52',
-        textShadowOffset: { width: 3, height: 3 },
-        textShadowRadius: 0,
+        fontWeigh:'Bold',
+        fontFamily:'RighteousRegular',
     },
 
 })
