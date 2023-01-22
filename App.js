@@ -2,21 +2,15 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useRef,useCallback, useState } from 'react';
 
-import SystemNavigationBar from 'react-native-system-navigation-bar';
+import * as SplashScreen from 'expo-splash-screen';
 
-//import * as SplashScreen from 'expo-splash-screen';
-import StartButton from './moduls/StartButton';
+import MenuButton from './moduls/MenuButton';
 import Title from './moduls/Title';
 
-//SplashScreen.preventAutoHideAsync();
-
-SystemNavigationBar.navigationHide();
-
 export default function App() {
-
   // font
   const [fontsLoaded] = useFonts({
-    'RighteousRegular': require('./assets/fonts/Righteous-Regular.ttf'),
+    'FredokaOne': require('./assets/fonts/FredokaOne-Regular.ttf'),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -29,11 +23,13 @@ export default function App() {
     return null;
   }
 
-
   return (
           <View style={styles.container} >
             <Title/>
-            <StartButton/>
+            <View style={styles.menuButtons}>
+              <MenuButton>Start</MenuButton>
+              <MenuButton>Credits</MenuButton>
+            </View>
           </View>
   );
 }
@@ -43,7 +39,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F7F6E7',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 100,
+    paddingVertical:100,
+    paddingHorizontal:30,
+  },
+  menuButtons:{
+    marginTop:120,
   },
 });

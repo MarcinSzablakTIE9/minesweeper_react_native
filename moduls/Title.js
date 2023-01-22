@@ -1,24 +1,49 @@
-import React from "react";
-import { Text, Image, StyleSheet } from "react-native";
+import { StyleSheet, Pressable } from "react-native";
+import Animated, {useSharedValue, useAnimatedStyle, withRepeat, withTiming, withSequence} from 'react-native-reanimated';
+
+import TextAnimator from './TextAnimator';
 
 const Title = (props) =>{
 
+    const spinValue = useSharedValue(0)
+
+    const animatedStyle = useAnimatedStyle(() => {
+        return {
+        transform: [{ rotateZ: `${spinValue.value}deg` }],
+        };
+    });
+
+    const onPress = () => {
+        spinValue.value = withSequence(
+            withTiming(Math.random()*-360, { duration: 1000 }),
+            withRepeat(withTiming(Math.random()*360, { duration: 1500 }), 1, true),
+            withTiming(0, { duration: 2000 })
+        );
+    }
+
     return(
         <>
-            <Text>
-                Minesweepe
-                <Image style={styles.image} source={require('../assets/mina.png')}/>
-                r
-            </Text> 
+            <TextAnimator
+                content="Minesweeper"
+                style={styles.text}/>
+                
+            <Pressable onPress={onPress}>
+                <Animated.Image style={[styles.image, animatedStyle]} source={require('../assets/mina.png')}/>
+            </Pressable>
         </>
     )
 }
 
-const styles = StyleSheet.create({
-    
+const styles = StyleSheet.create({  
+    text:{
+        fontSize:50,
+        fontFamily:'FredokaOne',
+        color:'#314E52',
+    },
     image:{
-        width:100,
-        height:100
+        marginTop:100,
+        width:200,
+        height:200,
     },
 })
 
