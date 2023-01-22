@@ -1,47 +1,15 @@
-import { View, Animated, Pressable, Text, StyleSheet} from 'react-native';
-import { useFonts } from 'expo-font';
-import { useRef,useCallback } from 'react';
-import * as SplashScreen from 'expo-splash-screen';
-
-
-SplashScreen.preventAutoHideAsync();
+import { View, Pressable, Text, StyleSheet} from 'react-native';
 
 const StartButton = (props) =>{
-    //animacja
 
-    const fadeAnim = useRef(new Animated.Value(1)).current;
+    const onPress = () =>{
+      console.log("sex")
+    }
 
-    const fadeOut = () => {
-        Animated.timing(fadeAnim, {
-          toValue: 0,
-          duration: 1000,
-          useNativeDriver: true,
-        }).start();
-      };    
-
-    // Font 
-
-    const [fontsLoaded] = useFonts({
-        'RighteousRegular': require('../assets/fonts/Righteous-Regular.ttf'),
-      });
-    
-      const onLayoutRootView = useCallback(async () => {
-        if (fontsLoaded) {
-          await SplashScreen.hideAsync();
-        }
-      }, [fontsLoaded]);
-    
-      if (!fontsLoaded) {
-        return null;
-      }
-
-    //Przycisk
     return(
-        <>
-            <Pressable onPress={fadeOut}>
-                <Animated.View style={[styles.container,{opacity:fadeAnim}]} android_ripple={ {color:'#314E52'}}>
-                    <Text style={styles.text}>Start</Text>
-                </Animated.View>
+        <>  
+            <Pressable style={styles.container} onPress={onPress} android_ripple={ {color:'#314E52', borderless: true}}>
+                    <Text style={styles.text}>Start</Text>      
             </Pressable>
         </>
     )
@@ -61,9 +29,9 @@ const styles = StyleSheet.create({
     },
     text: {
         color:'#314E52',
-        fontSize:100,
+        fontSize:30,
         fontWeigh:'Bold',
-        fontFamily:'RighteousRegular',
+        fontFamily:'RighteousRegular'
     },
 
 })
