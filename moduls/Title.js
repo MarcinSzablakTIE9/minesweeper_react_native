@@ -14,6 +14,7 @@ const Title = (props) =>{
     });
 
     const onPress = () => {
+        console.log('aa')
         spinValue.value = withSequence(
             withTiming(Math.random()*-360, { duration: 1000 }),
             withRepeat(withTiming(Math.random()*360, { duration: 1500 }), 1, true),
@@ -39,9 +40,10 @@ const styles = StyleSheet.create({
         fontSize:50,
         fontFamily:'FredokaOne',
         color:'#314E52',
+        marginBottom:100,
     },
     image:{
-        marginTop:100,
+        
         width:200,
         height:200,
     },

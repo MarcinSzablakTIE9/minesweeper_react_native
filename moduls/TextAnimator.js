@@ -1,55 +1,49 @@
-import React from "react";
-import {Text, View, StyleSheet, Animated} from 'react-native';
-import { useSharedValue, withTiming, withRepeat, withSequence, useAnimatedStyle } from "react-native-reanimated";
+import React, { useState } from 'react';
+import { Text, View, Animated } from 'react-native';
 
+const TextAnimator = (props) => {
+  const [letters] = useState(props.content.split(''));
+  const [animations] = useState(letters.map(() => new Animated.Value(0)));
 
-const TextAnimator = (props) =>{
-    const animatedValues = [];
-
-    const textArr = props.content.trim().split('');
-
-    const spinValue = useSharedValue(0)
-
-    textArr.forEach((_, i) => {
-        animatedValues[i] = new Animated.Value(0);
+  const useEffect = () => {
+    animations.forEach((animation, index) => {
+      Animated.timing(animation, {
+        toValue: 1,
+        duration: 1000,
+        delay: index * 100,
+        useNativeDriver: true,
+      }).start();
     });
+  }
 
-    const animated = useAnimatedStyle(() => {
-        const animations = textArr.map((_, i) => {
-            return Animated.timing(animatedValues[i],{
-                transform: [{ rotateZ: `${spinValue.value}deg` }]
-            })
-        })
-    })
+  useEffect()
 
-    const animation = () =>{
-        spinValue.value = withSequence(
-          withTiming(Math.random()*-360, { duration: Math.random()* 50 }),
-          withRepeat(withTiming(Math.random()*360, { duration: 600 }), false, true),
+  return (
+    <View style={styles.container}>
+      {letters.map((letter, index) => {
+        const animatedStyle = {
+          transform: [{
+            translateX: animations[index].interpolate({
+              inputRange: [0, 1],
+              outputRange: [-50, 0]
+            }),
+          }],
+        };
+
+        return (
+          <Animated.Text key={index} style={[props.style, animatedStyle]}>
+            {letter}
+          </Animated.Text>
         );
-      }
-      
-    animation()
+      })}
+    </View>
+  );
+};
 
-    return(
-        <View style={styles.wrapper}>
-            {textArr.map((word, index) => {
-                return (
-                    <Animated.Text key={`${word}-${index}`} style={[props.style, animatedValues[index]]}>
-                        {word}
-                    </Animated.Text>
-                )
-            })}
-        </View>
-    )
-}
-
-const styles = StyleSheet.create({
-    wrapper:{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-    }
-})
+const styles = {
+  container: {
+    flexDirection: 'row',
+  },
+};
 
 export default TextAnimator;
