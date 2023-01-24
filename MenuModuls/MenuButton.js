@@ -20,14 +20,18 @@ const MenuButton = (props) =>{
   
   animation()
 
+  const onPress = () =>{
+    const data = props.value
+    props.onCallback(data)
+  }
+
+
   return(
-    <>  
-      <Pressable >
+      <Pressable onPress={onPress}>
         <Animated.View style={[styles.container, animatedStyle]}>
           <Text style={styles.text}>{props.children}</Text>  
         </Animated.View>    
       </Pressable>
-    </>
     )
 };
 
@@ -35,7 +39,7 @@ const styles = StyleSheet.create({
     container:{
         alignItems:'center',
         paddingVertical:10,
-        paddingHorizontal:50,
+        paddingHorizontal:30,
         backgroundColor:'#F2A154',
         borderRadius:30,
         shadowColor:'black',

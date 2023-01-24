@@ -9,8 +9,8 @@ const TextAnimator = (props) => {
     animations.forEach((animation, index) => {
       Animated.timing(animation, {
         toValue: 1,
-        duration: 1000,
-        delay: index * 100,
+        duration: 1200,
+        delay: index * 200,
         useNativeDriver: true,
       }).start();
     });
@@ -23,9 +23,9 @@ const TextAnimator = (props) => {
       {letters.map((letter, index) => {
         const animatedStyle = {
           transform: [{
-            translateX: animations[index].interpolate({
+            translateY: animations[index].interpolate({
               inputRange: [0, 1],
-              outputRange: [-50, 0]
+              outputRange: [-1000, 0]
             }),
           }],
         };

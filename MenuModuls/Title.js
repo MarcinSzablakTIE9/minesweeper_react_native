@@ -1,4 +1,4 @@
-import { StyleSheet, Pressable } from "react-native";
+import { StyleSheet, Pressable, View } from "react-native";
 import Animated, {useSharedValue, useAnimatedStyle, withRepeat, withTiming, withSequence} from 'react-native-reanimated';
 
 import TextAnimator from './TextAnimator';
@@ -14,7 +14,6 @@ const Title = (props) =>{
     });
 
     const onPress = () => {
-        console.log('aa')
         spinValue.value = withSequence(
             withTiming(Math.random()*-360, { duration: 1000 }),
             withRepeat(withTiming(Math.random()*360, { duration: 1500 }), 1, true),
@@ -23,7 +22,7 @@ const Title = (props) =>{
     }
 
     return(
-        <>
+        <View style={styles.conteiner}>
             <TextAnimator
                 content="Minesweeper"
                 style={styles.text}/>
@@ -31,11 +30,15 @@ const Title = (props) =>{
             <Pressable onPress={onPress}>
                 <Animated.Image style={[styles.image, animatedStyle]} source={require('../assets/mina.png')}/>
             </Pressable>
-        </>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({  
+    conteiner:{
+        alignItems:'center',
+        justifyContent:'center',
+    },
     text:{
         fontSize:50,
         fontFamily:'FredokaOne',
@@ -43,9 +46,8 @@ const styles = StyleSheet.create({
         marginBottom:100,
     },
     image:{
-        
-        width:200,
-        height:200,
+        width:300,
+        height:300,
     },
 })
 
