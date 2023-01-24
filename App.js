@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, StatusBar,SafeAreaView } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useCallback, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
@@ -31,9 +31,14 @@ export default function App() {
 
 
   return (
-      <View style={styles.container} >
-        <Menu onCallback={menuButtonOnPress}/>
-      </View>
+    <SafeAreaView style={styles.container} >
+      <StatusBar
+        backgroundColor="#F7F6E7"
+        translucent={true}
+        barStyle="dark-content"
+      />
+      <Menu onCallback={menuButtonOnPress}/>
+    </SafeAreaView>
   );
 }
 

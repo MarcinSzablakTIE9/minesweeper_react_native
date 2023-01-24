@@ -3,13 +3,15 @@
     "name": "Minesweeper",
     "slug": "Minesweeper",
     "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "orientation": "deafult",
+    "icon": "./assets/appIcon.png",
+    "androidNavigationBar":{
+      "visible":"deafult"
+    },
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#F2A154"
+      "backgroundColor": "#F7F6E7"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,12 +24,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#F2A154"
+        "foregroundImage": "./assets/adaptive-icon.png"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
     }
   }
 }
