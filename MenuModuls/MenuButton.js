@@ -17,17 +17,10 @@ const MenuButton = (props) =>{
       withRepeat(withTiming(Math.random()*2, { duration: 600 }), false, true),
     );
   }
-  
   animation()
 
-  const onPress = () =>{
-    const data = props.value
-    props.onCallback(data)
-  }
-
-
   return(
-      <Pressable onPress={onPress}>
+      <Pressable onPress={props.onPress}>
         <Animated.View style={[styles.container, animatedStyle]}>
           <Text style={styles.text}>{props.children}</Text>  
         </Animated.View>    
@@ -40,7 +33,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         paddingVertical:10,
         paddingHorizontal:30,
-        backgroundColor:'#F2A154',
+        backgroundColor:'#ebad73',
         borderRadius:30,
         shadowColor:'black',
         shadowOffset: { width: 0, height: 0 },
@@ -49,8 +42,8 @@ const styles = StyleSheet.create({
         marginTop:40
     },
     text: {
-        color:'#314E52',
-        fontSize:30,
+        color:'#4a4a4a',
+        fontSize:35,
         fontFamily: 'FredokaOne',
     },
 })

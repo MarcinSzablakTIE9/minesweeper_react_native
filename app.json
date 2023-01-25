@@ -5,9 +5,6 @@
     "version": "1.0.0",
     "orientation": "deafult",
     "icon": "./assets/appIcon.png",
-    "androidNavigationBar":{
-      "visible":"deafult"
-    },
     "splash": {
       "image": "./assets/icon.png",
       "resizeMode": "contain",

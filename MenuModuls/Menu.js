@@ -1,15 +1,17 @@
 import React from "react";
 import Title from "./Title";
 import MenuButton from "./MenuButton";
-import { View, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 
-const Menu = (props) =>{
+
+const Menu = ({navigation}) =>{
+
     return(
         <View style={styles.menu}>
             <Title/>
             <View style={styles.menuButtons}>
-                <MenuButton onCallback={props.onCallback} value={1}>Start</MenuButton>
-                <MenuButton onCallback={props.onCallback} value={2}>Credits</MenuButton>
+                <MenuButton onPress={() => navigation.navigate("Game")}>Start</MenuButton>
+                <MenuButton onPress={() => navigation.navigate("Credits")}>Credits</MenuButton>
             </View>
         </View>
     )
@@ -17,9 +19,11 @@ const Menu = (props) =>{
 
 const styles = StyleSheet.create({
     menuButtons:{
-        marginTop:50,
+        marginTop:25,
     },
     menu:{
+        flex: 1,
+        backgroundColor: '#F7F6E7',
         paddingVertical:100,
         paddingHorizontal:30,
         alignItems: 'center',

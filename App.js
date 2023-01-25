@@ -1,13 +1,16 @@
-import { StyleSheet, View, StatusBar,SafeAreaView } from 'react-native';
 import { useFonts } from 'expo-font';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import Menu from './MenuModuls/Menu.js';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import Menu from './MenuModuls/Menu';
+import GameScreen from './GameModules/GameScreen';
+import Credits from './CreditsModuls/Credits';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-
-  const [value, setValue] = useState(0);
-
   // font
   const [fontsLoaded] = useFonts({
     'FredokaOne': require('./assets/fonts/FredokaOne-Regular.ttf'),
@@ -23,28 +26,13 @@ export default function App() {
     return null;
   }
 
-  //zmiana ekranu
-
-  const menuButtonOnPress = (data) => {
-    setValue(data);
-  }
-
-
   return (
-    <SafeAreaView style={styles.container} >
-      <StatusBar
-        backgroundColor="#F7F6E7"
-        translucent={true}
-        barStyle="dark-content"
-      />
-      <Menu onCallback={menuButtonOnPress}/>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName='Menu'>
+        <Stack.Screen name="Menu" component={Menu}/>
+        <Stack.Screen name="Game" component={GameScreen}/>
+        <Stack.Screen name="Credits" component={Credits}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F7F6E7',
-  },
-});

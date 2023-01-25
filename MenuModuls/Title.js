@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     text:{
         fontSize:50,
         fontFamily:'FredokaOne',
-        color:'#314E52',
+        color:'#4a4a4a',
         marginBottom:100,
     },
     image:{
