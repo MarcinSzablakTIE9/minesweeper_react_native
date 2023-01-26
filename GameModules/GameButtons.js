@@ -1,7 +1,7 @@
 import { View, Pressable, Text, StyleSheet} from 'react-native';
 import Animated, {useSharedValue, useAnimatedStyle, withRepeat, withTiming, withSequence} from 'react-native-reanimated' 
 
-const MenuButton = (props) =>{
+const GameButton = (props) =>{
 
   const rotation = useSharedValue(0);
   
@@ -13,15 +13,15 @@ const MenuButton = (props) =>{
 
   const animation = () =>{
     rotation.value = withSequence(
-      withTiming(Math.round(Math.random()*-2), { duration: Math.random()* 50 }),
-      withRepeat(withTiming(Math.round(Math.random()*2), { duration: 600 }), false, true),
+      withTiming(Math.round(Math.random()*2), { duration: Math.random()* 50 }),
+      withRepeat(withTiming(Math.round(Math.random()*-2), { duration: 600 }), false, true),
     );
   }
   animation()
 
   return(
       <Pressable onPress={props.onPress} style={{marginTop:40}}>
-        <Animated.View style={[styles.container, animatedStyle]}>
+        <Animated.View style={[styles.container, {backgroundColor:props.color}, animatedStyle]}>
           <Text style={styles.text}>{props.children}</Text>  
         </Animated.View>    
       </Pressable>
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
         alignItems:'center',
         paddingVertical:10,
         paddingHorizontal:30,
-        backgroundColor:'#ebad73',
         borderRadius:30,
         shadowColor:'black',
         shadowOffset: { width: 0, height: 0 },
@@ -47,4 +46,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default MenuButton;
+export default GameButton;
