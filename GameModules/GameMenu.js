@@ -14,13 +14,11 @@ const GameMenu = ({navigation}) =>{
                 </GameButton>
                 <GameButton 
                     color={"#f2ea55"} 
-                    difficulty={2} 
-                    onPress={() => navigation.navigate("Game",{difficulty:[16,16,40],color:"#f7d2bc"})}>
+                    onPress={() => navigation.navigate("Game",{difficulty:[16,16,40],color:"#feffad"})}>
                         intermediate
                 </GameButton>
                 <GameButton 
                     color={"#f25d55"} 
-                    difficulty={3} 
                     onPress={() => navigation.navigate("Game",{difficulty:[16,30,99],color:"#ffadad"})}>
                         Expert
                 </GameButton>

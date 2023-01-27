@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import createMinePool from "./MinePool";
 
 const Game = ({route}) =>{
@@ -10,7 +10,9 @@ const Game = ({route}) =>{
             {tab.map((row, index) => (
                 <View style={styles.row} key={index}>
                     {row.split('').map((cell, i) => (
-                        <Text style={styles.cell} key={i}>{cell}</Text>
+                        <Pressable key={[index,i]} style={styles.cell}>
+                            <Text>{cell}</Text>
+                        </Pressable>
                     ))}
                 </View>
                 ))}
@@ -29,10 +31,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     cell:{
-        padding:5,
+        paddingVertical:5,
+        paddingHorizontal:10,
         borderWidth:1,
         borderColor:"#000",
-        backgroundColor:"#ffffff"
+        backgroundColor:"#ffffff",
     }
 })
 
