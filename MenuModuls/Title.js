@@ -1,5 +1,6 @@
 import { StyleSheet, Pressable, View } from "react-native";
 import Animated, {useSharedValue, useAnimatedStyle, withRepeat, withTiming, withSequence} from 'react-native-reanimated';
+import { horizontalScale, verticalScale, moderateScale } from "../assets/Metrics";
 
 import TextAnimator from './TextAnimator';
 
@@ -36,18 +37,20 @@ const Title = (props) =>{
 
 const styles = StyleSheet.create({  
     conteiner:{
+        paddingVertical:'10%',
+        paddingHorizontal:'10%',
         alignItems:'center',
         justifyContent:'center',
     },
     text:{
-        fontSize:50,
+        fontSize:moderateScale(70),
         fontFamily:'FredokaOne',
         color:'#4a4a4a',
-        marginBottom:100,
+        marginBottom:verticalScale(250),
     },
     image:{
-        width:300,
-        height:300,
+        width:horizontalScale(700),
+        height:horizontalScale(700),
     },
 })
 

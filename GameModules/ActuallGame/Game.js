@@ -1,12 +1,21 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import {Animated, View, Text, StyleSheet, Pressable } from "react-native";
 import createMinePool from "./MinePool";
+import GestureHandler,{ PinchGestureHandler} from "react-native-gesture-handler";
+import { verticalScale } from "../../assets/Metrics"; 
 
 const Game = ({route}) =>{
     const pool = createMinePool(route.params.difficulty)
     const tab = pool.map(row => row.join(''));
+    const scale = new Animated.Value(1);
+
+
     return(
-        <View style={[styles.container,{backgroundColor:route.params.color}]}>
+        <Animated.View style={[
+            styles.container,
+            {backgroundColor:route.params.color},
+        
+        ]}>
             {tab.map((row, index) => (
                 <View style={styles.row} key={index}>
                     {row.split('').map((cell, i) => (
@@ -16,7 +25,7 @@ const Game = ({route}) =>{
                     ))}
                 </View>
                 ))}
-        </View>
+        </Animated.View>
     )
 }
 
@@ -24,7 +33,7 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor:'#F7F6E7',
-        paddingVertical:100,
+        paddingVertical:verticalScale(200),
         alignItems:"center"
     },
     row:{

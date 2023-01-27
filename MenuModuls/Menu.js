@@ -1,17 +1,18 @@
 import React from "react";
 import Title from "./Title";
 import MenuButton from "./MenuButton";
-import { View, Text, StyleSheet, Pressable } from "react-native";
-
+import { View, StyleSheet } from "react-native";
+import { horizontalScale } from "../assets/Metrics";
 
 const Menu = ({navigation}) =>{
-
     return(
         <View style={styles.menu}>
-            <Title/>
-            <View style={styles.menuButtons}>
-                <MenuButton onPress={() => navigation.navigate("GameMenu")}>Start</MenuButton>
-                <MenuButton onPress={() => navigation.navigate("Credits")}>Credits</MenuButton>
+            <View style={styles.menuScale}>
+                <Title/>
+                <View style={styles.menuButtons}>
+                    <MenuButton onPress={() => navigation.navigate("GameMenu")}>Start</MenuButton>
+                    <MenuButton onPress={() => navigation.navigate("Credits")}>Credits</MenuButton>
+                </View>
             </View>
         </View>
     )
@@ -19,13 +20,14 @@ const Menu = ({navigation}) =>{
 
 const styles = StyleSheet.create({
     menuButtons:{
-        marginTop:25,
+        marginTop:horizontalScale(5),
     },
     menu:{
         flex: 1,
         backgroundColor: '#F7F6E7',
-        paddingVertical:100,
-        paddingHorizontal:30,
+        alignItems: 'center',
+    },
+    menuScale:{
         alignItems: 'center',
     }
 })

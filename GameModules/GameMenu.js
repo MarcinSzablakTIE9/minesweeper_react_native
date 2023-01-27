@@ -1,6 +1,7 @@
 import React from "react";
 import {View, Text, StyleSheet} from "react-native";
 import GameButton from "./GameButtons";
+import { horizontalScale, verticalScale, moderateScale } from "../assets/Metrics";
 
 const GameMenu = ({navigation}) =>{
     return(
@@ -22,7 +23,7 @@ const GameMenu = ({navigation}) =>{
                     onPress={() => navigation.navigate("Game",{difficulty:[16,30,99],color:"#ffadad"})}>
                         Expert
                 </GameButton>
-                <View style={{marginTop:200, paddingHorizontal:100}}>
+                <View style={{marginTop:horizontalScale(300), paddingHorizontal:horizontalScale(200)}}>
                     <GameButton color={"#bb83e6"} onPress={() => navigation.navigate("Tips")}>Tips</GameButton>
                 </View>
             </View>
@@ -34,12 +35,12 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor:'#F7F6E7',
-        paddingVertical:100,
+        paddingVertical:'10%',
         paddingHorizontal:30,
     },
     text:{
         textAlign:'center',
-        fontSize:35,
+        fontSize:moderateScale(55),
         fontFamily: 'FredokaOne',
         color:"#4a4a4a"
     },

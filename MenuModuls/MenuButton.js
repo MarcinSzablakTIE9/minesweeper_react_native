@@ -1,5 +1,6 @@
 import { View, Pressable, Text, StyleSheet} from 'react-native';
 import Animated, {useSharedValue, useAnimatedStyle, withRepeat, withTiming, withSequence} from 'react-native-reanimated' 
+import { horizontalScale, verticalScale, moderateScale } from "../assets/Metrics";
 
 const MenuButton = (props) =>{
 
@@ -20,7 +21,7 @@ const MenuButton = (props) =>{
   animation()
 
   return(
-      <Pressable onPress={props.onPress} style={{marginTop:40}}>
+      <Pressable onPress={props.onPress} style={{marginTop:horizontalScale(60)}}>
         <Animated.View style={[styles.container, animatedStyle]}>
           <Text style={styles.text}>{props.children}</Text>  
         </Animated.View>    
@@ -31,18 +32,14 @@ const MenuButton = (props) =>{
 const styles = StyleSheet.create({
     container:{
         alignItems:'center',
-        paddingVertical:10,
-        paddingHorizontal:30,
+        paddingVertical:verticalScale(20),
+        paddingHorizontal:horizontalScale(60),
         backgroundColor:'#ebad73',
         borderRadius:30,
-        shadowColor:'black',
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.3,
-        shadowRadius:5,
     },
     text: {
         color:'#4a4a4a',
-        fontSize:35,
+        fontSize:verticalScale(100),
         fontFamily: 'FredokaOne',
     },
 })
