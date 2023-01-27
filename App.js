@@ -5,8 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Menu from './MenuModuls/Menu';
-import GameScreen from './GameModules/GameScreen';
+import GameMenu from './GameModules/GameMenu';
 import Credits from './CreditsModuls/Credits';
+import Tips from './GameModules/Tips/Tips';
+import Game from './GameModules/ActuallGame/Game';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,8 +32,10 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName='Menu'>
         <Stack.Screen name="Menu" component={Menu}/>
-        <Stack.Screen name="Game" component={GameScreen}/>
+        <Stack.Screen name="GameMenu" component={GameMenu}/>
         <Stack.Screen name="Credits" component={Credits}/>
+        <Stack.Screen name="Tips" component={Tips}/>
+        <Stack.Screen name="Game" component={Game}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

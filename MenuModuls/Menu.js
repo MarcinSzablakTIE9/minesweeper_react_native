@@ -10,7 +10,7 @@ const Menu = ({navigation}) =>{
         <View style={styles.menu}>
             <Title/>
             <View style={styles.menuButtons}>
-                <MenuButton onPress={() => navigation.navigate("Game")}>Start</MenuButton>
+                <MenuButton onPress={() => navigation.navigate("GameMenu")}>Start</MenuButton>
                 <MenuButton onPress={() => navigation.navigate("Credits")}>Credits</MenuButton>
             </View>
         </View>
