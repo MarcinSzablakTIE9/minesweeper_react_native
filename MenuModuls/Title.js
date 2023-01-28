@@ -43,14 +43,14 @@ const styles = StyleSheet.create({
         justifyContent:'center',
     },
     text:{
-        fontSize:moderateScale(70),
+        fontSize:moderateScale(50),
         fontFamily:'FredokaOne',
         color:'#4a4a4a',
-        marginBottom:verticalScale(250),
+        marginBottom:verticalScale(50),
     },
     image:{
-        width:horizontalScale(700),
-        height:horizontalScale(700),
+        width:moderateScale(230),
+        height:moderateScale(230),
     },
 })
 

@@ -20,7 +20,7 @@ const Menu = ({navigation}) =>{
 
 const styles = StyleSheet.create({
     menuButtons:{
-        marginTop:horizontalScale(5),
+        marginTop:'5%',
     },
     menu:{
         flex: 1,

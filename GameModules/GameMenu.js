@@ -23,7 +23,7 @@ const GameMenu = ({navigation}) =>{
                     onPress={() => navigation.navigate("Game",{difficulty:[16,30,99],color:"#ffadad"})}>
                         Expert
                 </GameButton>
-                <View style={{marginTop:horizontalScale(300), paddingHorizontal:horizontalScale(200)}}>
+                <View style={{marginTop:'40%', paddingHorizontal:'10%'}}>
                     <GameButton color={"#bb83e6"} onPress={() => navigation.navigate("Tips")}>Tips</GameButton>
                 </View>
             </View>
@@ -36,11 +36,11 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor:'#F7F6E7',
         paddingVertical:'10%',
-        paddingHorizontal:30,
+        paddingHorizontal:'10%',
     },
     text:{
         textAlign:'center',
-        fontSize:moderateScale(55),
+        fontSize:moderateScale(35),
         fontFamily: 'FredokaOne',
         color:"#4a4a4a"
     },

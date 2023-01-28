@@ -21,7 +21,7 @@ const MenuButton = (props) =>{
   animation()
 
   return(
-      <Pressable onPress={props.onPress} style={{marginTop:horizontalScale(60)}}>
+      <Pressable onPress={props.onPress} style={{marginTop:'4%'}}>
         <Animated.View style={[styles.container, animatedStyle]}>
           <Text style={styles.text}>{props.children}</Text>  
         </Animated.View>    
@@ -32,14 +32,14 @@ const MenuButton = (props) =>{
 const styles = StyleSheet.create({
     container:{
         alignItems:'center',
-        paddingVertical:verticalScale(20),
-        paddingHorizontal:horizontalScale(60),
+        paddingVertical:'7%',
+        paddingHorizontal:'8%',
         backgroundColor:'#ebad73',
-        borderRadius:30,
+        borderRadius:10000,
     },
     text: {
         color:'#4a4a4a',
-        fontSize:verticalScale(100),
+        fontSize:moderateScale(35),
         fontFamily: 'FredokaOne',
     },
 })

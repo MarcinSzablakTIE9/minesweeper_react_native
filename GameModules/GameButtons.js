@@ -1,5 +1,6 @@
 import { View, Pressable, Text, StyleSheet} from 'react-native';
 import Animated, {useSharedValue, useAnimatedStyle, withRepeat, withTiming, withSequence} from 'react-native-reanimated' 
+import { moderateScale } from '../assets/Metrics';
 
 const GameButton = (props) =>{
 
@@ -31,17 +32,13 @@ const GameButton = (props) =>{
 const styles = StyleSheet.create({
     container:{
         alignItems:'center',
-        paddingVertical:10,
-        paddingHorizontal:30,
-        borderRadius:30,
-        shadowColor:'black',
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.3,
-        shadowRadius:5,
+        paddingVertical:'5%',
+        paddingHorizontal:'10%',
+        borderRadius:100000,
     },
     text: {
         color:'#4a4a4a',
-        fontSize:35,
+        fontSize:moderateScale(30),
         fontFamily: 'FredokaOne',
     },
 })
