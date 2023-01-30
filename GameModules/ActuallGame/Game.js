@@ -1,31 +1,53 @@
 import React from "react";
-import {Animated, View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import createMinePool from "./MinePool";
-import GestureHandler,{ PinchGestureHandler} from "react-native-gesture-handler";
-import { verticalScale } from "../../assets/Metrics"; 
+import { Gesture, GestureDetector, GestureHandlerRootView } from "react-native-gesture-handler";
+import Animated,{ useAnimatedStyle, useSharedValue } from "react-native-reanimated";
+
 
 const Game = ({route}) =>{
+
     const pool = createMinePool(route.params.difficulty)
     const tab = pool.map(row => row.join(''));
-    const scale = new Animated.Value(1);
 
+    const scale = useSharedValue(route.params.scale);
+    const savedScale = useSharedValue(route.params.scale);
+
+    const pinchGesture = Gesture.Pinch()
+    .onUpdate((e) => {
+      scale.value = savedScale.value * e.scale;
+    })
+    .onEnd(() => {
+      savedScale.value = scale.value;
+    });
+  
+    const animatedStyle = useAnimatedStyle(() => ({
+        transform: [{ scale: scale.value }],
+    }));
 
     return(
-        <Animated.View style={[
-            styles.container,
-            {backgroundColor:route.params.color},
-        
-        ]}>
-            {tab.map((row, index) => (
-                <View style={styles.row} key={index}>
-                    {row.split('').map((cell, i) => (
-                        <Pressable key={[index,i]} style={styles.cell}>
-                            <Text>{cell}</Text>
-                        </Pressable>
-                    ))}
-                </View>
-                ))}
-        </Animated.View>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+            <View style={[
+                styles.container,
+                {backgroundColor:route.params.color}
+            ]}>
+                <GestureDetector gesture={pinchGesture}>
+                    <Animated.View style={animatedStyle}>
+                        <View style={{backgroundColor:'#fff'}}>
+                            {tab.map((row, index) => (
+                                <View style={styles.row} key={index}>
+                                    {row.split('').map((cell, i) => (
+                                        <Pressable key={[index,i]} style={styles.cell}>
+                                            <Text>{cell}</Text>
+                                        </Pressable>
+                                    ))}
+                                </View>
+                                ))}
+                        </View>
+                    </Animated.View>
+                </GestureDetector>
+            </View>
+        </GestureHandlerRootView>
     )
 }
 

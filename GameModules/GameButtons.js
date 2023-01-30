@@ -1,6 +1,9 @@
 import { View, Pressable, Text, StyleSheet} from 'react-native';
 import Animated, {useSharedValue, useAnimatedStyle, withRepeat, withTiming, withSequence} from 'react-native-reanimated' 
-import { moderateScale } from '../assets/Metrics';
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+
 
 const GameButton = (props) =>{
 
@@ -14,14 +17,14 @@ const GameButton = (props) =>{
 
   const animation = () =>{
     rotation.value = withSequence(
-      withTiming(Math.round(Math.random()*2), { duration: Math.random()* 50 }),
-      withRepeat(withTiming(Math.round(Math.random()*-2), { duration: 600 }), false, true),
+      withTiming(Math.random()*2, { duration: Math.random()* 50 }),
+      withRepeat(withTiming((Math.random()*-2), { duration: 600 }), false, true),
     );
   }
   animation()
 
   return(
-      <Pressable onPress={props.onPress} style={{marginTop:40}}>
+      <Pressable onPress={props.onPress} style={{marginTop:height/20}}>
         <Animated.View style={[styles.container, {backgroundColor:props.color}, animatedStyle]}>
           <Text style={styles.text}>{props.children}</Text>  
         </Animated.View>    
@@ -38,7 +41,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color:'#4a4a4a',
-        fontSize:moderateScale(30),
+        fontSize:(height/width)*17,
         fontFamily: 'FredokaOne',
     },
 })

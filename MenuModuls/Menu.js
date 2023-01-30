@@ -2,7 +2,9 @@ import React from "react";
 import Title from "./Title";
 import MenuButton from "./MenuButton";
 import { View, StyleSheet } from "react-native";
-import { horizontalScale } from "../assets/Metrics";
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 const Menu = ({navigation}) =>{
     return(
@@ -26,6 +28,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#F7F6E7',
         alignItems: 'center',
+        paddingHorizontal:width/10,
     },
     menuScale:{
         alignItems: 'center',

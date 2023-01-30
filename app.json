@@ -28,7 +28,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/icon.png"
+      "favicon": "./assets/mina.png"
     }
   }
 }
