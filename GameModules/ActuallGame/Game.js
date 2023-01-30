@@ -13,6 +13,11 @@ const Game = ({route}) =>{
     const scale = useSharedValue(route.params.scale);
     const savedScale = useSharedValue(route.params.scale);
 
+    const translateX = useSharedValue(0);
+    const translateY = useSharedValue(0);
+
+    const context = useSharedValue({ x: 0, y: 0 })
+
     const pinchGesture = Gesture.Pinch()
     .onUpdate((e) => {
       scale.value = savedScale.value * e.scale;
@@ -22,8 +27,21 @@ const Game = ({route}) =>{
     });
   
     const animatedStyle = useAnimatedStyle(() => ({
-        transform: [{ scale: scale.value }],
+        transform: [
+            { translateX: translateX.value },
+            { translateY: translateY.value }, 
+            { scale: scale.value }
+        ],
     }));
+
+    const panGesture = Gesture.Pan()
+    .onStart(() => {
+        context.value = {x: translateX.value, y: translateY.value}
+    })
+    .onChange((e) => {
+        translateX.value = e.translationX + context.value.x
+        translateY.value = e.translationY + context.value.y
+    })
 
     return(
         <GestureHandlerRootView style={{ flex: 1 }}>
@@ -31,7 +49,7 @@ const Game = ({route}) =>{
                 styles.container,
                 {backgroundColor:route.params.color}
             ]}>
-                <GestureDetector gesture={pinchGesture}>
+                <GestureDetector gesture={Gesture.Simultaneous(panGesture,pinchGesture)}>
                     <Animated.View style={animatedStyle}>
                         <View style={{backgroundColor:'#fff'}}>
                             {tab.map((row, index) => (
