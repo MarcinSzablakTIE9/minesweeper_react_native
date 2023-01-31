@@ -1,38 +1,35 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable, Image } from "react-native";
-import createMinePool from "./MinePool";
+import { View, StyleSheet, Dimensions} from "react-native";
+import createMinePool from "./CreateMinePool";
 import { Gesture, GestureDetector, GestureHandlerRootView } from "react-native-gesture-handler";
 import Animated,{ useAnimatedStyle, useSharedValue } from "react-native-reanimated";
+import MinePool from "./MinePool";
 
+const {width, height} = Dimensions.get('window')
 
 const Game = ({route}) =>{
-
-    const pool = createMinePool(route.params.difficulty)
-    const tab = pool.map(row => row.join(''));
-
+    //minepool parametrs
+    const size = route.params.difficulty
+    const pool = createMinePool(size)
+    
+    //Pinch animation parametrs
     const scale = useSharedValue(route.params.scale);
     const savedScale = useSharedValue(route.params.scale);
-
+    //Pan animation parametrs
     const translateX = useSharedValue(0);
     const translateY = useSharedValue(0);
-
     const context = useSharedValue({ x: 0, y: 0 })
 
     const pinchGesture = Gesture.Pinch()
     .onUpdate((e) => {
-      scale.value = savedScale.value * e.scale;
+        scale.value = savedScale.value * e.scale;
     })
     .onEnd(() => {
-      savedScale.value = scale.value;
+        if (scale.value > 3){
+            scale.value = 3
+        } 
+        savedScale.value = scale.value;
     });
-  
-    const animatedStyle = useAnimatedStyle(() => ({
-        transform: [
-            { translateX: translateX.value },
-            { translateY: translateY.value }, 
-            { scale: scale.value }
-        ],
-    }));
 
     const panGesture = Gesture.Pan()
     .onStart(() => {
@@ -43,6 +40,14 @@ const Game = ({route}) =>{
         translateY.value = e.translationY + context.value.y
     })
 
+    const animatedStyle = useAnimatedStyle(() => ({
+        transform: [
+            { translateX: translateX.value },
+            { translateY: translateY.value }, 
+            { scale: scale.value }
+        ],
+    }));
+
     return(
         <GestureHandlerRootView style={{ flex: 1 }}>
             <View style={[
@@ -51,20 +56,11 @@ const Game = ({route}) =>{
             ]}>
                 <GestureDetector gesture={Gesture.Simultaneous(panGesture,pinchGesture)}>
                     <Animated.View style={animatedStyle}>
-                        <View style={{backgroundColor:'#fff'}}>
-                            {tab.map((row, index) => (
-                                <View style={styles.row} key={index}>
-                                    {row.split('').map((cell, i) => (
-                                        <Pressable key={[index,i]} style={styles.cell}>
-                                            <Text>{cell}</Text>
-                                        </Pressable>
-                                    ))}
-                                </View>
-                                ))}
-                        </View>
+                        <MinePool pool={pool}/>
                     </Animated.View>
                 </GestureDetector>
             </View>
+            
         </GestureHandlerRootView>
     )
 }
@@ -76,16 +72,6 @@ const styles = StyleSheet.create({
         paddingVertical:'30%',
         alignItems:"center"
     },
-    row:{
-        flexDirection: 'row',
-    },
-    cell:{
-        paddingVertical:5,
-        paddingHorizontal:10,
-        borderWidth:1,
-        borderColor:"#000",
-        backgroundColor:"#ffffff",
-    }
 })
 
 
