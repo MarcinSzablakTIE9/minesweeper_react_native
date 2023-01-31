@@ -4,13 +4,13 @@ import createMinePool from "./CreateMinePool";
 import { Gesture, GestureDetector, GestureHandlerRootView } from "react-native-gesture-handler";
 import Animated,{ useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 import MinePool from "./MinePool";
+import ResetButton from "./ResetButton";
 
 const {width, height} = Dimensions.get('window')
 
 const Game = ({route}) =>{
     //minepool parametrs
-    const size = route.params.difficulty
-    const pool = createMinePool(size)
+    const pool = createMinePool(route.params.difficulty)
     
     //Pinch animation parametrs
     const scale = useSharedValue(route.params.scale);
@@ -48,30 +48,42 @@ const Game = ({route}) =>{
         ],
     }));
 
+    const reset_values = () =>{
+        scale.value = 1
+        translateX.value = 0
+        translateY.value = 0
+    }
+
     return(
-        <GestureHandlerRootView style={{ flex: 1 }}>
-            <View style={[
-                styles.container,
-                {backgroundColor:route.params.color}
-            ]}>
+        <View style={[styles.container,{backgroundColor:route.params.color}]}>
+            <GestureHandlerRootView>
                 <GestureDetector gesture={Gesture.Simultaneous(panGesture,pinchGesture)}>
-                    <Animated.View style={animatedStyle}>
+                    <Animated.View style={[styles.gesture, animatedStyle]}>
                         <MinePool pool={pool}/>
                     </Animated.View>
-                </GestureDetector>
-            </View>
-            
-        </GestureHandlerRootView>
+                </GestureDetector>    
+            </GestureHandlerRootView>
+            <ResetButton fun={reset_values}/>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     container:{
-        flex:1,
         backgroundColor:'#F7F6E7',
         paddingVertical:'30%',
+        alignItems:"center",
+        flex:1
+    },
+    gameContainer:{
+        padding:'30%',
         alignItems:"center"
     },
+    gesture:{
+        backgroundColor:'#cf0f0f',
+        //padding:'10%'
+    }
+
 })
 
 
