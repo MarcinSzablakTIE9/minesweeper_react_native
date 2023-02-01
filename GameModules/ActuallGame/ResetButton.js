@@ -3,11 +3,10 @@ import { Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
-
 const ResetButton = (props) =>{
     return(
         <Pressable style={styles.button} onPress={props.fun}>
-            <Text style={styles.text}>reset</Text>
+            <Text style={styles.text}>Fix position</Text>
         </Pressable>
     )
 }

@@ -55,16 +55,16 @@ const Game = ({route}) =>{
     }
 
     return(
-        <View style={[styles.container,{backgroundColor:route.params.color}]}>
-            <GestureHandlerRootView>
+        <GestureHandlerRootView style={{flex:1, padding:0}}>
+            <View style={[styles.container,{backgroundColor:route.params.color}]}>
                 <GestureDetector gesture={Gesture.Simultaneous(panGesture,pinchGesture)}>
                     <Animated.View style={[styles.gesture, animatedStyle]}>
-                        <MinePool pool={pool}/>
+                        <MinePool pool={pool} mines={route.params.difficulty[2]}/>
                     </Animated.View>
                 </GestureDetector>    
-            </GestureHandlerRootView>
-            <ResetButton fun={reset_values}/>
-        </View>
+                <ResetButton fun={reset_values}/>
+            </View>
+        </GestureHandlerRootView>
     )
 }
 
@@ -85,6 +85,5 @@ const styles = StyleSheet.create({
     }
 
 })
-
 
 export default Game;
